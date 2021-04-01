@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   new Divider(
                       color: Colors.black
                   ),
-                  Text('お付き合い記念日 : 2021年1月13日',
+                  Text('お付き合い記念日 : 2021年1月1日',
                     style: TextStyle(
                       height: 2.0,
                     ),
