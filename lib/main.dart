@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'yunyuApp'),
+      home: MyHomePage(title: 'hogeApp'),
     );
   }
 }
@@ -44,39 +44,52 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             Container(
-              // 内側の余白
-              padding: EdgeInsets.all(32),
-              child: Text('彼氏と彼女',),
-            ),
-            Container(
               decoration: BoxDecoration(
                 // 枠線
                 border: Border.all(color: Colors.black, width: 1),
                 // 角丸
                 borderRadius: BorderRadius.circular(8),
               ),
-              padding: EdgeInsets.only(top: 30, right: 30, bottom: 70, left: 30),
+              padding: EdgeInsets.only(top: 50, right: 30, bottom: 100, left: 30),
+              margin: EdgeInsets.all(15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text('お付き合いをはじめて',
                     style: TextStyle(
-                    height: 2.0,
+                    height: 0,
                     ),
                   ),
                   Text('100日目',
                     style: TextStyle(
                     height: 2.0,
+                        fontSize: 22,
                     ),
                   ),
                   new Divider(
                       color: Colors.black
                   ),
-                  Text('お付き合い記念日 : 2021年1月1日',
+                  Text('お付き合い記念日  :  2021年1月1日',
                     style: TextStyle(
-                      height: 2.0,
+                      height: 3.0,
                     ),
-                  )
+                  ),
+                  new Divider(
+                      color: Colors.black
+                  ),
+                  Container(
+                    child: Align(
+                      alignment: Alignment(-0.28, 0),
+                        child : Text('次の記念日まで  :  30日',
+                        style: TextStyle(
+                        height: 3.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Divider(
+                      color: Colors.black
+                  ),
                 ],
               ),
             ),
