@@ -80,8 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     child: Align(
                       alignment: Alignment(-0.28, 0),
-                        child : Text('次の記念日まで  :  31'
-                            '日',
+                        child : Text('次の記念日まで  :  30日',
                         style: TextStyle(
                         height: 3.0,
                         ),
