@@ -1,0 +1,17 @@
+Index: lib/main.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/main.dart	(revision c26973a017366b431820c66c2c97a84757cca785)
++++ lib/main.dart	(date 1617623866000)
+@@ -80,7 +80,8 @@
+                   Container(
+                     child: Align(
+                       alignment: Alignment(-0.28, 0),
+-                        child : Text('次の記念日まで  :  30日',
++                        child : Text('次の記念日まで  :  31'
++                            '日',
+                         style: TextStyle(
+                         height: 3.0,
+                         ),
