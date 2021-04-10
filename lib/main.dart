@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:haruaki_app/next_page.dart';
 
-void main() => runApp(TestPage());
+void main() => runApp(MyApp());
 
-class TestPage extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _TestPageState createState() => _TestPageState();
-}
-
-class _TestPageState extends State<TestPage> {
-
-  String _payment = '未選択';
-
-  void _handleRadioButton(String payment) => setState(() { _payment = payment; } );
-
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '',
-      home: Scaffold(
-        appBar: AppBar(title: Text("ほむほむゆんゆ日記",
+      title: 'Flutter Demo',
+      home: MyHomePage(title: 'Flutter Demo App'),
+    );
+  }
+}
+
+
+class MyHomePage extends StatefulWidget {
+  // ignore: non_constant_identifier_names
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("交換日記",
           style: TextStyle(color: HexColor('#696969'),
           ),
-        ),
-              backgroundColor: HexColor('#fff3b8'),
-            ),
+          ),
+            backgroundColor: HexColor('#fff3b8'),
+      ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                '今、どんな気持ちですか？',
+                '今日はどんな1日でしたか？',
                 style: TextStyle(
                   fontSize: 20,
                   ),
@@ -41,90 +52,32 @@ class _TestPageState extends State<TestPage> {
               borderRadius: BorderRadius.circular(8),
 
             ),
-            margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            margin: EdgeInsets.fromLTRB(15, 15, 15, 50),
+            padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
             width: 300.0,
-            height: 300.0,
+            height: 400.0,
             child: TextField(
-              maxLength: 140, //入力最大文字数
-              maxLines:10,
+              maxLength: 300, //入力最大文字数
+              maxLines:15,
             ),
 
             ),
-
-          Container(
-            padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-            child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text(
-                  '体調はいかがですか？',
-                  style: TextStyle(
-                    fontSize: 20,
+          Center(
+            // ignore: deprecated_member_use
+            child: OutlinedButton(
+              child: Text('投稿'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NextPage(),
                   ),
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Radio(
-                      activeColor: Colors.blueAccent,
-                      value: 'とても良い',
-                      groupValue: _payment,
-                      onChanged: _handleRadioButton,
-                    ),
-                    Text('とても良い'),
-                  ],
-                ),Column(
-                  children: <Widget>[
-                    Radio(
-                      activeColor: Colors.blueAccent,
-                      value: '良い',
-                      groupValue: _payment,
-                      onChanged: _handleRadioButton,
-                    ),
-                    Text('良い'),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Radio(
-                      activeColor: Colors.blueAccent,
-                      value: '悪い',
-                      groupValue: _payment,
-                      onChanged: _handleRadioButton,
-                    ),
-                    Text('悪い'),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Radio(
-                      activeColor: Colors.blueAccent,
-                      value: 'とても悪い',
-                      groupValue: _payment,
-                      onChanged: _handleRadioButton,
-                      ),
-                    Text('とても悪い'),
-    ],
-                ),
-              ],
+                );
+              },
             ),
-            ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: null,
-                child: Text('できた'),
-          ),
-
-            ],
           ),
          ],
         ),
-    ),
     );
   }
 }
