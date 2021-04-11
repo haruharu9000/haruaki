@@ -14,16 +14,35 @@ class NextPage extends StatelessWidget {
     body: Container (
       height: double.infinity,
       color: Colors.white,
-      child: Center(
-        // ignore: deprecated_member_use
-        child: OutlineButton(
-          child: Text('戻る'),
-            onPressed: () {
-            Navigator.pop(context);
+      child: ListView(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.map),
+            title: Text('Map'),
+            trailing: Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NextPage(),
+                ),
+              );
             },
           ),
-        ),
+          ListTile(
+            leading: Icon(Icons.map),
+            title: Text('Map'),
+            trailing: Icon(Icons.arrow_forward_ios),
+          ),
+          ListTile(
+            leading: Icon(Icons.map),
+            title: Text('Map'),
+            trailing: Icon(Icons.arrow_forward_ios),
+          ),
+      ],
       ),
+      ),
+
     );
   }
 }

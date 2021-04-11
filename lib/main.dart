@@ -54,11 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             margin: EdgeInsets.fromLTRB(15, 15, 15, 50),
             padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-            width: 300.0,
-            height: 400.0,
+            width: 400.0,
+            height: 300.0,
             child: TextField(
               maxLength: 300, //入力最大文字数
-              maxLines:15,
+              maxLines:11,
             ),
 
             ),
