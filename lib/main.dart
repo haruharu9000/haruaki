@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:haruaki_app/book_list_page.dart';
 import 'package:haruaki_app/next_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -70,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NextPage(),
+                      builder: (context) => BookList(),
                   ),
                 );
               },
