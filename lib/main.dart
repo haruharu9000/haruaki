@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "日記",
+          "交換日記",
           style: TextStyle(
             color: HexColor('#696969'),
           ),
