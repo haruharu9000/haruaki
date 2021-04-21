@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haruaki_app/book_list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:haruaki_app/main_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   // ignore: non_constant_identifier_names
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -27,35 +28,35 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("交換日記",
-          style: TextStyle(color: HexColor('#696969'),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "日記",
+          style: TextStyle(
+            color: HexColor('#696969'),
           ),
-          ),
-            backgroundColor: HexColor('#fff3b8'),
+        ),
+        backgroundColor: HexColor('#fff3b8'),
       ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                '今日はどんな1日でしたか？',
-                style: TextStyle(
-                  fontSize: 20,
-                  ),
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            '今日はどんな1日でしたか？',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
           Container(
-
             decoration: BoxDecoration(
               // 枠線
               border: Border.all(color: HexColor('#e6c0c0'), width: 2),
               // 角丸
               borderRadius: BorderRadius.circular(8),
-
             ),
             margin: EdgeInsets.fromLTRB(15, 15, 15, 50),
             padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
@@ -63,10 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 300.0,
             child: TextField(
               maxLength: 300, //入力最大文字数
-              maxLines:11,
+              maxLines: 11,
             ),
-
-            ),
+          ),
           Center(
             // ignore: deprecated_member_use
             child: OutlinedButton(
@@ -74,15 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => BookList(),
-                  ),
+                  MaterialPageRoute(builder: (context) => BookListPage()),
                 );
               },
             ),
           ),
-         ],
-        ),
+        ],
+      ),
     );
   }
 }
