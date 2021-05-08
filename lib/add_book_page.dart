@@ -19,39 +19,101 @@ class AddBookPage extends StatelessWidget {
         ),
         body: Consumer<AddBookModel>(
           builder: (context, model, child) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
+            return Container(
+              decoration: BoxDecoration(
+                // 枠線
+                border: Border.all(color: HexColor('#e6c0c0'), width: 2),
+                // 角丸
+                borderRadius: BorderRadius.circular(8),
+              ),
+              margin: EdgeInsets.fromLTRB(15, 15, 15, 50),
+              padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+              width: 400.0,
+              height: 300.0,
               child: Column(
                 children: <Widget>[
-                  Text(
-                    '今日はどんな1日でしたか？',
-                    style: TextStyle(
-                      fontSize: 20,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 15, 180, 15),
+                    child: Text(
+                      '調子はいかがですか？',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    child: Text('追加する'),
-                    onPressed: () async {
-                      await model.addBookToFirebase();
-                    },
-                  ),
-                  Container(
-                    child: TextField(
-                      maxLength: 300, //入力最大文字数
-                      maxLines: 11,
-                      onChanged: (text) {
-                        model.bookTitle = text;
-                      },
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#e6c0c0'), width: 2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    margin: EdgeInsets.fromLTRB(15, 15, 15, 50),
-                    padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    width: 400.0,
-                    height: 300.0,
-                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Radio(
+                              activeColor: Colors.blueAccent,
+                            ),
+                            Text('幸せ'),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Radio(
+                              activeColor: Colors.blueAccent,
+                            ),
+                            Text('うれしい'),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Radio(
+                              activeColor: Colors.blueAccent,
+                            ),
+                            Text('楽しい'),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Radio(
+                              activeColor: Colors.blueAccent,
+                            ),
+                            Text('いい感じ'),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Radio(
+                                  activeColor: Colors.blueAccent,
+                                ),
+                                Text('まあまあ'),
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Radio(
+                                  activeColor: Colors.blueAccent,
+                                ),
+                                Text('不安'),
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Radio(
+                                  activeColor: Colors.blueAccent,
+                                ),
+                                Text('かなしい'),
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Radio(
+                                  activeColor: Colors.blueAccent,
+                                ),
+                                Text('ひどい'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ]),
                 ],
               ),
             );
@@ -60,4 +122,16 @@ class AddBookPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

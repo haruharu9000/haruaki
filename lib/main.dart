@@ -43,14 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: HexColor('#fff3b8'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text(
-            '今日はどんな1日でしたか？',
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
           Container(
             decoration: BoxDecoration(
               // 枠線
