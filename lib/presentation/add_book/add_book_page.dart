@@ -6,6 +6,8 @@ import 'add_book_model.dart';
 class AddBookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+
     return ChangeNotifierProvider<AddBookModel>(
       create: (_) => AddBookModel(),
       child: Scaffold(
@@ -68,7 +70,7 @@ class AddBookPage extends StatelessWidget {
                       ),
                       margin: EdgeInsets.fromLTRB(5, 5, 5, 30),
                       padding: EdgeInsets.fromLTRB(5, 30, 5, 5),
-                      width: 400.0,
+                      width: deviceWidth * 0.93,
                       height: 125.0,
                       child: Column(
                         children: <Widget>[
