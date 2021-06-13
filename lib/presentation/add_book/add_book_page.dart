@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:haruaki_app/domain/book.dart';
 import 'package:provider/provider.dart';
 
 import 'add_book_model.dart';
 
 class AddBookPage extends StatelessWidget {
+  AddBookPage({this.book});
+  final Book book;
   @override
   Widget build(BuildContext context) {
-    final double deviceWidth = MediaQuery.of(context).size.width;
-
+    final bool isUpdate = book != null;
+    final textEditingController = TextEditingController();
+    if (isUpdate) {
+      textEditingController.text = book.title;
+    }
     return ChangeNotifierProvider<AddBookModel>(
       create: (_) => AddBookModel(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "体調管理アプリ(仮)",
-            style: TextStyle(
-              color: HexColor('#696969'),
-            ),
-          ),
-          backgroundColor: HexColor('#dcdcdc'),
+            isUpdate ? '本を編集' : '本を追加'),
+          
         ),
         body: Consumer<AddBookModel>(builder: (context, model, child) {
           return Padding(
@@ -47,6 +49,7 @@ class AddBookPage extends StatelessWidget {
                   width: 400.0,
                   height: 200.0,
                   child: TextField(
+                    controller: textEditingController,
                     decoration: InputDecoration(
                       hintText: '思いつくままに書き残してみよう',
                     ),
@@ -208,49 +211,17 @@ class AddBookPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
-                      child: const Text('保存する'),
+                      child: Text(isUpdate ? '更新する' : '追加する'),
                       style: ElevatedButton.styleFrom(
                         primary: HexColor('#38b48b'),
                         onPrimary: HexColor('#ffffff'),
                         padding: EdgeInsets.all(8.0),
                       ),
                       onPressed: () async {
-                        try {
-                          await model.addBookToFirebase();
-                          await showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('保存しました！'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          Navigator.of(context).pop();
-                        } catch (e) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text(e.toString()),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                        if (isUpdate) {
+                          await updateBook(model, context);
+                        } else {
+                          await addBook(model, context);
                         }
                       },
                     ),
@@ -262,9 +233,91 @@ class AddBookPage extends StatelessWidget {
         }),
       ),
     );
+      
+    
+  } 
+
+
+Future addBook(AddBookModel model, BuildContext context) async {
+  try {
+    await model.addBookToFirebase();
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('保存しました！'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    Navigator.of(context).pop();
+  } catch (e) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(e.toString()),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
+Future updateBook(AddBookModel model, BuildContext context) async {
+  try {
+                                await model.updateBook(book);
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('更新しました！'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    Navigator.of(context).pop();
+  } catch (e) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(e.toString()),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+}
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll('#', '');
